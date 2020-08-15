@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Product.Microservice.Data;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Product.Microservice.Controllers
 {
@@ -14,10 +11,12 @@ namespace Product.Microservice.Controllers
     public class ProductController : ControllerBase
     {
         private IApplicationDbContext _context;
+
         public ProductController(IApplicationDbContext context)
         {
             _context = context;
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(Entities.Product product)
         {
@@ -25,6 +24,7 @@ namespace Product.Microservice.Controllers
             await _context.SaveChanges();
             return Ok(product.Id);
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -32,6 +32,7 @@ namespace Product.Microservice.Controllers
             if (customers == null) return NotFound();
             return Ok(customers);
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -39,6 +40,7 @@ namespace Product.Microservice.Controllers
             if (product == null) return NotFound();
             return Ok(product);
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -48,6 +50,7 @@ namespace Product.Microservice.Controllers
             await _context.SaveChanges();
             return Ok(product.Id);
         }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, Entities.Product productData)
         {

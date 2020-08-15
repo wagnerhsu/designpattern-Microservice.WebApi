@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Customer.Microservice.Data;
-using Microsoft.AspNetCore.Http;
+﻿using Customer.Microservice.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Customer.Microservice.Controllers
 {
@@ -14,10 +11,12 @@ namespace Customer.Microservice.Controllers
     public class CustomerController : ControllerBase
     {
         private IApplicationDbContext _context;
+
         public CustomerController(IApplicationDbContext context)
         {
             _context = context;
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(Entities.Customer customer)
         {
@@ -25,6 +24,7 @@ namespace Customer.Microservice.Controllers
             await _context.SaveChanges();
             return Ok(customer.Id);
         }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -32,6 +32,7 @@ namespace Customer.Microservice.Controllers
             if (customers == null) return NotFound();
             return Ok(customers);
         }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -39,6 +40,7 @@ namespace Customer.Microservice.Controllers
             if (customer == null) return NotFound();
             return Ok(customer);
         }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -48,6 +50,7 @@ namespace Customer.Microservice.Controllers
             await _context.SaveChanges();
             return Ok(customer.Id);
         }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, Entities.Customer customerData)
         {

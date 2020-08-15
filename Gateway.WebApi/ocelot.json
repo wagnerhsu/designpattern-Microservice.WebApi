@@ -1,5 +1,4 @@
 {
-
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/product",
@@ -50,5 +49,4 @@
       "UpstreamHttpMethod": [ "GET", "DELETE" ]
     }
   ]
-
 }
